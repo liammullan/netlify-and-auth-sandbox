@@ -1,0 +1,96 @@
+---
+openapi: 3.0.0
+info:
+  title: Workout Video API
+  description: Daddy's workout video api, hell yeah...
+  contact:
+    email: liam@ometa.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: https://virtserver.swaggerhub.com/liammullan/liam-test-api/1.0.0
+    description: SwaggerHub API Auto Mocking
+  - url: https://virtserver.swaggerhub.com/liammullan/workout-api/1.0.0
+    description: SwaggerHub API Auto Mocking
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: developers
+    description: Operations available to regular developers
+paths:
+  /playlist:
+    get:
+      tags:
+        - developers
+      summary: generate a workout playlist
+      description: by specifying preferences you can get a customised workout playlist
+      operationId: createPlaylist
+      parameters:
+        - name: length
+          in: query
+          description: length of workout in minutes
+          required: true
+          style: form
+          explode: true
+          schema:
+            minimum: 5
+            type: integer
+            format: int32
+        - name: activitytype
+          in: query
+          description: what type of activity e.g. cardio, pilates, yoga
+          required: true
+          style: form
+          explode: true
+          schema:
+            $ref: '#/components/schemas/ActivityType'
+      responses:
+        "200":
+          description: playlist matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+        "400":
+          description: bad input parameter
+components:
+  schemas:
+    Playlist:
+      type: object
+      properties:
+        snippets:
+          type: array
+          items:
+            $ref: '#/components/schemas/VideoSnippet'
+    ActivityType:
+      type: string
+      enum:
+        - pilates
+        - yoga
+        - hiit
+        - cardio
+        - strength
+    VideoSnippet:
+      required:
+        - description
+        - end
+        - start
+        - youtubeid
+      type: object
+      properties:
+        youtubeid:
+          type: string
+          example: K-PpDkbcNGo
+        start:
+          minimum: 0
+          type: integer
+          format: int32
+        end:
+          minimum: 0
+          type: integer
+          format: int32
+        description:
+          type: string
+          example: A brief description of the exercise
