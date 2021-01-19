@@ -27,6 +27,10 @@ function SignInScreen() {
     return (
         <div>
             <p>Please sign-in:</p>
+            {/* can only render the form if we have a firebase auth in the auth context,
+                and this is done in an effect, i.e. after the first render. Is this approach
+                ok/sensible? Perhaps this component should be aware of the details of the
+                auth context? E.g. should the AuthProvider display a Loading screen? */}
             {authContext.firebaseAuth
                 ? <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={authContext.firebaseAuth}/>
                 : <h1>Loading...</h1>};
