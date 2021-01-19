@@ -1,10 +1,7 @@
 import React from 'react';
 import {useAuth} from "../../contexts/AuthContext";
 
-//import {AuthContext} from "../../contexts/AuthContext";
-
 function NavBar() {
-    // let firebaseContext = useContext(AuthContext);
 
     const auth = useAuth();
 

@@ -1,65 +1,37 @@
-// For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
+import React from 'react';
 import firebase from "firebase";
-import React, {useEffect, useState} from "react";
+import * as firebaseui from "firebaseui";
 import {StyledFirebaseAuth} from "react-firebaseui";
+import {IAuthContext, useAuth} from "../../contexts/AuthContext";
 
-// Configure FirebaseUI.
-// const uiConfig = {
-//   // Popup signin flow rather than redirect flow.
-//   signInFlow: 'popup',
-//   // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-//   signInSuccessUrl: '/signedIn',
-//   // We will display Google and Facebook as auth providers.
-//   signInOptions: [
-//     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-//   ],
-// };
+function SignInScreen() {
 
-// Configure FirebaseUI.
-const uiConfig = {
-    // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
-    // We will display Google and Facebook as auth providers.
-    signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.FacebookAuthProvider.PROVIDER_ID
-    ],
-    callbacks: {
-        // Avoid redirects after sign-in.
-        signInSuccessWithAuthResult: () => false,
-    },
-};
+    console.log("SignInScreen");
+    const authContext: IAuthContext = useAuth();
 
-export function SignInScreen() {
-    const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
-
-    // Listen to the Firebase Auth state and set the local state.
-    useEffect(() => {
-        const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-            setIsSignedIn(!!user);
-        });
-        return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    }, [isSignedIn]);
-
-    if (!isSignedIn) {
-        return (
-            <div>
-                <h1>My App</h1>
-        <p>Please sign-in:</p>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-        </div>
-    );
+    const uiConfig: firebaseui.auth.Config = {
+        // Popup signin flow rather than redirect flow.
+        signInFlow: 'popup',
+        // We will display Google and Facebook as auth providers.
+        signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        callbacks: {
+            // Avoid redirects after sign-in.
+            signInSuccessWithAuthResult: () => false,
+        },
     }
-
-    const userName = firebase.auth().currentUser ? firebase.auth().currentUser : "Oops no current user";
 
     return (
         <div>
-            <h1>My App</h1>
-
-            <p>Welcome {userName}! You are now signed-in!</p>
-            <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
-    </div>
-);
+            <p>Please sign-in:</p>
+            {authContext.firebaseAuth
+                ? <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={authContext.firebaseAuth}/>
+                : <h1>Loading...</h1>};
+        </div>
+    );
 }
+
+export default SignInScreen;
