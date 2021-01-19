@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {AuthProvider, useAuth} from "./contexts/AuthContext";
+import {HomeScreen} from "./components/Home/Home";
+import NavBar from "./components/NavBar/NavBar";
+import SignInScreen2 from "./components/SignInScreen/SignInScreen2";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const authContext = useAuth();
+    const signInScreen = !authContext.user ? <SignInScreen2/> : <h1>Go For A Bath Livia Poo Poo Yacky Yack</h1>;
+    //const signInScreen = <h1>Gogog</h1>;
+    console.log("Auth context:");
+    // console.log(authContext);
+    //console.log("Auth context:");
+    return (
+        <>
+            <NavBar/>
+            <HomeScreen/>
+            {signInScreen}
+        </>
+    );
 }
 
 export default App;
