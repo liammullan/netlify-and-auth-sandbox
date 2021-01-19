@@ -6,7 +6,6 @@ import {IAuthContext, useAuth} from "../../contexts/AuthContext";
 
 function SignInScreen() {
 
-    console.log("SignInScreen");
     const authContext: IAuthContext = useAuth();
 
     const uiConfig: firebaseui.auth.Config = {
