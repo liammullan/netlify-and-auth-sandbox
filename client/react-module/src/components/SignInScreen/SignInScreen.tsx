@@ -3,14 +3,17 @@ import firebase from "firebase";
 import * as firebaseui from "firebaseui";
 import {StyledFirebaseAuth} from "react-firebaseui";
 import {IAuthContext, useAuth} from "../../contexts/AuthContext";
+import {useHistory} from "react-router-dom";
 
 function SignInScreen() {
 
     const authContext: IAuthContext = useAuth();
+    const history = useHistory();
 
     const uiConfig: firebaseui.auth.Config = {
         // Popup signin flow rather than redirect flow.
         signInFlow: 'popup',
+        signInSuccessUrl: "/",
         signInOptions: [
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -18,7 +21,7 @@ function SignInScreen() {
         ],
         callbacks: {
             // Avoid redirects after sign-in.
-            signInSuccessWithAuthResult: () => false,
+            //signInSuccessWithAuthResult: () => false,
         },
     }
 
