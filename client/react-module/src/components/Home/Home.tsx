@@ -1,3 +1,6 @@
+import {useApi} from "../../contexts/ApiContext";
+import {ActivityType} from 'workout-api';
+
 export function HomeScreen() {
     // const authContext: IAuthContext = useAuth();
     // //console.log(authContext);
@@ -6,6 +9,16 @@ export function HomeScreen() {
     // //console.log(firebaseContext.firebase.auth().currentUser);
     //
     // const name = authContext.user ? authContext.user.displayName : "Anon";
-    return <h2>Home screen.</h2>
+
+    const api = useApi();
+
+    api.createPlaylist(2, ActivityType.Pilates)
+        .then(r => console.log(r))
+        .catch(err => console.log(err));
+
+    return (
+        <h2>Home screen.</h2>
+    );
+
     // return <h2>Home screen. User: {name}</h2>
 }

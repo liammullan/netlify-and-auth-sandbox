@@ -1,1 +1,6 @@
 /.idea
+/client/api-frontend/
+/server/api-backend/
+/server/api-backend-impl/api-backend-impl.iml
+/netlify-and-auth-sandbox.iml
+/openapi-generator/openapi-generator.iml
