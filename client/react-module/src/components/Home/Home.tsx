@@ -1,5 +1,6 @@
 import {useApi} from "../../contexts/ApiContext";
 import {ActivityType} from 'workout-api';
+import React from "react";
 
 export function HomeScreen() {
     // const authContext: IAuthContext = useAuth();
@@ -12,9 +13,11 @@ export function HomeScreen() {
 
     const api = useApi();
 
-    api.createPlaylist(2, ActivityType.Pilates)
-        .then(r => console.log(r))
-        .catch(err => console.log(err));
+    if(api) {
+        api.createPlaylist(2, ActivityType.Pilates)
+            .then(r => console.log(r))
+            .catch(err => console.log(err));
+    }
 
     return (
         <h2>Home screen.</h2>

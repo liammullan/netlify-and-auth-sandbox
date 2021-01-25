@@ -35,16 +35,35 @@ public class OpenAPI2SpringBoot implements CommandLineRunner {
 
     }
 
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/greeting-javaconfig").allowedOrigins("http://localhost:8080");
+//            }
+//        };
+//    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/greeting-javaconfig").allowedOrigins("http://localhost:8080");
+//            }
+//        };
+//    }
+
     @Bean
     public WebMvcConfigurer webConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
+                        .allowedOrigins("http://localhost:3000")
                         .allowedMethods("*")
-                        .allowedHeaders("Content-Type");
+                        .allowedHeaders("Access-Control-Allow-Origin", "Content-Type", "*");
             }
+
         };
     }
 

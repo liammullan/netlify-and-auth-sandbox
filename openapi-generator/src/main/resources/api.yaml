@@ -94,3 +94,11 @@ components:
         description:
           type: string
           example: A brief description of the exercise
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+# Apply the security globally to all operations
+security:
+  - bearerAuth: []         # use the same name as above
