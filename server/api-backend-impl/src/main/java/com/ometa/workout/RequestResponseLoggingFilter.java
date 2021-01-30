@@ -1,5 +1,6 @@
 package com.ometa.workout;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -21,9 +22,9 @@ public class RequestResponseLoggingFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         Enumeration<String> headerNames = req.getHeaderNames();
 
-        while(headerNames.hasMoreElements()){
-            System.out.println(headerNames.nextElement());
-        }
+//        while(headerNames.hasMoreElements()){
+//            System.out.println(headerNames.nextElement());
+//        }
 
         System.out.println(String.format(
                 "Logging Request  %s : %s", req.getMethod(),
@@ -36,6 +37,8 @@ public class RequestResponseLoggingFilter implements Filter {
         String authorizationHeader = req.getHeader("authorization");
         System.out.println("Auth Header: " + authorizationHeader);
 
+        System.out.println("SecurityContextHolder.getContext().getAuthentication():");
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
 
         chain.doFilter(request, response);
 

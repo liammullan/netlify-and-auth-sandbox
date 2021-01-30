@@ -10,20 +10,20 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 servers:
-  - url: https://virtserver.swaggerhub.com/liammullan/liam-test-api/1.0.0
-    description: SwaggerHub API Auto Mocking
   - url: https://virtserver.swaggerhub.com/liammullan/workout-api/1.0.0
     description: SwaggerHub API Auto Mocking
+  - url: https://localhost:8080/api
+    description: Local context for testing
 tags:
   - name: admins
     description: Secured Admin-only calls
-  - name: developers
-    description: Operations available to regular developers
+  - name: users
+    description: Operations available to every user
 paths:
   /playlist:
     get:
       tags:
-        - developers
+        - users
       summary: generate a workout playlist
       description: by specifying preferences you can get a customised workout playlist
       operationId: createPlaylist
@@ -55,6 +55,8 @@ paths:
                 $ref: '#/components/schemas/Playlist'
         "400":
           description: bad input parameter
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'
 components:
   schemas:
     Playlist:
@@ -84,21 +86,30 @@ components:
           type: string
           example: K-PpDkbcNGo
         start:
+          description: Start point of video clip in seconds
           minimum: 0
           type: integer
           format: int32
         end:
+          description: End of clip from start of video in seconds
           minimum: 0
           type: integer
           format: int32
         description:
           type: string
           example: A brief description of the exercise
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
   securitySchemes:
     bearerAuth:            # arbitrary name for the security scheme
       type: http
       scheme: bearer
       bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+#    openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
+#      type: openIdConnect
+#      openIdConnectUrl: https://securetoken.google.com/netlify-and-auth-sandbox/.well-known/openid-configuration
 # Apply the security globally to all operations
 security:
   - bearerAuth: []         # use the same name as above
+    #  - openId: []         # use the same name as above

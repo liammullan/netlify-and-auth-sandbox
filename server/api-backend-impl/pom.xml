@@ -25,11 +25,62 @@
             <version>0.0.1</version>
             <scope>compile</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
+
+<!--        <dependency>-->
+<!--            <groupId>com.google.api-client</groupId>-->
+<!--            <artifactId>google-api-client</artifactId>-->
+<!--            <version>1.30.4</version>-->
+<!--        </dependency>-->
+
+        <!-- used for debugging filter -->
+        <!-- https://mvnrepository.com/artifact/org.bitbucket.b_c/jose4j -->
         <dependency>
-            <groupId>com.google.firebase</groupId>
-            <artifactId>firebase-admin</artifactId>
-            <version>7.1.0</version>
+            <groupId>org.bitbucket.b_c</groupId>
+            <artifactId>jose4j</artifactId>
+            <version>0.7.4</version>
+        </dependency>
+
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.google.firebase/firebase-admin &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.firebase</groupId>-->
+<!--            <artifactId>firebase-admin</artifactId>-->
+<!--            <version>7.1.0</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt-api</artifactId>-->
+<!--            <version>0.11.2</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt-impl</artifactId>-->
+<!--            <version>0.11.2</version>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt-jackson</artifactId> &lt;!&ndash; or jjwt-gson if Gson is preferred &ndash;&gt;-->
+<!--            <version>0.11.2</version>-->
+<!--            <scope>runtime</scope>-->
+<!--            &lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security &ndash;&gt;-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-oauth2-client</artifactId>-->
+<!--        </dependency>-->
+        <!-- may not need the above, only the below? -->
+        <!-- The back end api acts as a "resource server" in the oauth2 terminology - i.e. we just
+             get sent a token by the client which it got from the authorization server -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
 
     </dependencies>

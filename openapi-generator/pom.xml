@@ -141,7 +141,7 @@
                             <!--                            <output>${basedir}/api-backend</output>-->
                             <configOptions>
                                 <library>spring-mvc</library>
-                                <!--                                <apiFirst>true</apiFirst>-->
+<!--                                <apiFirst>true</apiFirst>-->
                                 <sourceFolder>src/main/java</sourceFolder>
                                 <dateLibrary>java8</dateLibrary>
                                 <groupId>ometa.com</groupId>
@@ -154,9 +154,10 @@
                                 <modelPackage>${output-package}.models</modelPackage>
                                 <delegatePattern>true</delegatePattern>
                                 <!-- <singleContentTypes>true</singleContentTypes>-->
-                                <skipDefaultInterface>true</skipDefaultInterface>
-                                <interfaceOnly>true</interfaceOnly>
-                                <generateApiTests>true</generateApiTests>
+                                <skipDefaultInterface>false</skipDefaultInterface>
+                                <interfaceOnly>false</interfaceOnly>
+                                <!-- what does this do? -->
+                                <generateApiTests>false</generateApiTests>
                             </configOptions>
                         </configuration>
                     </execution>
@@ -171,7 +172,7 @@
                             <output>${project.basedir}/../client/api-frontend</output>
                             <!--                            <output>${project.build.directory}/generated-sources/frontend</output>-->
                             <configOptions>
-                                <npmName>com.ometa.workout.workout</npmName>
+                                <npmName>com.ometa.workout</npmName>
                                     <!-- excluded so we use the version from the api definition file -->
                                     <!-- <npmVersion>0.1.0</npmVersion>-->
                                 <supportES6>true</supportES6>
